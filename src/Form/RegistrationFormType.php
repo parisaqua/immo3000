@@ -23,22 +23,13 @@ class RegistrationFormType extends ApplicationType
         $gender = ['M.' => 'Monsieur', 'Mme.' => 'Madame'];
         
         $builder
-            ->add('email', EmailType::class, $this->getConfiguration("E-mail", "Votre adresse électronique ...", [
-                'required'=>false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez rentrer une adresse e-mail valide',
-                    ])
-                ]   
-            ]))
-            ->add('gender', ChoiceType::class, [
-                'choices' => $this->getChoices(),
-                'label' => 'Civilité'
-            ])
+            ->add('email', EmailType::class, $this->getConfiguration("E-mail", "Votre adresse électronique ...", ['required'=>false ]) )
+            ->add('gender', ChoiceType::class, ['choices' => $this->getChoices(),'label' => 'Civilité'])
             ->add('firstName', TextType:: class, $this->getConfiguration("Prénom", "Votre prénom ...", ['required'=>false])  )
             ->add('lastName', TextType:: class, $this->getConfiguration("Nom", "Votre nom ...", ['required'=>false]) )
             ->add('agreeTerms', CheckboxType::class, $this->getConfiguration("J'accepte les conditions générales", "", [
                 'mapped' => false,
+                'required'=>false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'Veillez accepter les conditions générales.',
@@ -49,7 +40,8 @@ class RegistrationFormType extends ApplicationType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'required'=>false,
+                'required'=>false
+                ,
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Renseignez un mot de passe',
@@ -59,8 +51,8 @@ class RegistrationFormType extends ApplicationType
                         'minMessage' => 'Votre mote de passe doit contenir {{ limit }} charactères minimum',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
-                    ]),
-                ],
+                    ]
+                ),],
             ]))
         ;
     }
