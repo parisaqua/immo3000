@@ -69,7 +69,7 @@ class AppImmoAutheticatorAuthenticator extends AbstractFormLoginAuthenticator im
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Cette adresse e-mail est inconnue !');
         }
 
         return $user;
@@ -85,7 +85,7 @@ class AppImmoAutheticatorAuthenticator extends AbstractFormLoginAuthenticator im
      */
     public function getPassword($credentials): ?string
     {
-        return $credentials['password'];
+        return $credentials['password']; 
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
@@ -94,8 +94,8 @@ class AppImmoAutheticatorAuthenticator extends AbstractFormLoginAuthenticator im
             return new RedirectResponse($targetPath);
         }
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('home_page'));
+        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl()

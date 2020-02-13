@@ -8,10 +8,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Cette adresse e-mail est déjà enregistrée ! Merci d'enchoisir une autre ou de vous connecter.")
  */
 class User implements UserInterface
 {
+    
+    const GENDER = [
+        0 => 'M.',
+        1 => 'Mme'
+    ];
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -35,6 +41,11 @@ class User implements UserInterface
      */
     private $password;
 
+      /**
+     * @ORM\Column(type="integer")
+     */
+    private $gender;
+    
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -44,6 +55,10 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastName;
+
+    public function getFullName() {
+        return "{$this->firstName} {$this->lastName}";
+    }
 
     public function getId(): ?int
     {
@@ -121,6 +136,22 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getGender(): ?int
+    {
+        return $this->gender;
+    }
+
+    public function setGender(int $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getGenderType(): string {
+        return self::GENDER[$this->gender];
     }
 
     public function getFirstName(): ?string

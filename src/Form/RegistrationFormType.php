@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -19,6 +20,8 @@ class RegistrationFormType extends ApplicationType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $gender = ['M.' => 'Monsieur', 'Mme.' => 'Madame'];
+        
         $builder
             ->add('email', EmailType::class, $this->getConfiguration("E-mail", "Votre adresse électronique ...", [
                 'required'=>false,
@@ -28,6 +31,10 @@ class RegistrationFormType extends ApplicationType
                     ])
                 ]   
             ]))
+            ->add('gender', ChoiceType::class, [
+                'choices' => $this->getChoices(),
+                'label' => 'Civilité'
+            ])
             ->add('firstName', TextType:: class, $this->getConfiguration("Prénom", "Votre prénom ...", ['required'=>false])  )
             ->add('lastName', TextType:: class, $this->getConfiguration("Nom", "Votre nom ...", ['required'=>false]) )
             ->add('agreeTerms', CheckboxType::class, $this->getConfiguration("J'accepte les conditions générales", "", [
@@ -38,7 +45,7 @@ class RegistrationFormType extends ApplicationType
                     ]),
                 ],
             ]))
-            ->add('plainPassword', PasswordType::class, $this->getConfiguration("Mot de passe", "Choisissez un mot de passe ..." , [
+            ->add('plainPassword', PasswordType::class, $this->getConfiguration("Mot de passe (6 caractères minimum)", "Choisissez un mot de passe ..." , [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -63,5 +70,15 @@ class RegistrationFormType extends ApplicationType
         $resolver->setDefaults([
             'data_class' => User::class,
         ]);
+    }
+
+    private function getChoices()
+    {
+        $choices = User::GENDER;
+        $output = [];
+        foreach($choices as $k => $v) {
+            $output[$v] = $k;
+        }
+        return $output;
     }
 }

@@ -11,11 +11,11 @@
 
         {% if app.user %}
             <div class="mb-3">
-                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                You are logged in as {{ app.user.fristName }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
             </div>
         {% endif %}
         
-        <h1 class="h3 mb-3 font-weight-normal">Connexion à Immobilier Digital</h1>
+        <h1 class="h3 mb-3 mt-4 font-weight-normal">Connexion à Immobilier Digital</h1>
         <label for="inputEmail">Votre e-mail</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
         <label for="inputPassword">Mot de passe</label>
@@ -25,18 +25,14 @@
             value="{{ csrf_token('authenticate') }}"
         >
 
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox mb-3">
+            <div class="checkbox mb-3 mt-3">
                 <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
+                    <input type="checkbox" name="_remember_me" title="test"> Se souvenir de moi
                 </label>
             </div>
-        #}
+       
         
-        <button class="btn btn-center btn-lg btn-primary" type="submit">
+        <button class="btn btn-center btn-success" type="submit">
             <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;
             Connexion
         </button>
