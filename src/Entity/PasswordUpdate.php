@@ -17,7 +17,7 @@ class PasswordUpdate
     
     /**
      * @Assert\Length(
-     *      min = 2,
+     *      min = 6,
      *      max = 650,
      *      minMessage = "Votre mot de passe doit contenir au moins {{ limit }} charactères.",
      *      maxMessage = "Votre mot de passe ne peut pas dépasser {{ limit }} charactères."

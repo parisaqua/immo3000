@@ -15,8 +15,17 @@
             </div>
         </div>
 
-       
-        <a href="{{ path('user_account_edit') }}" class="btn btn-center btn-success"><i class="fas fa-user-check"></i>&nbsp;&nbsp;Modifier mon profil</a>
+       <div class="row pt-4">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <a href="{{ path('user_account_edit') }}" class="btn btn-center btn-info"><i class="fas fa-user"></i>&nbsp;&nbsp;Modifier mon profil</a>
+            </div>
+            <div class="col-md-5">
+                <a href="{{ path('user_account_password_reset') }}" class="btn btn-center btn-info"><i class="fas fa-lock"></i>&nbsp;&nbsp;Modifier mon mot de passe</a>
+            </div>
+            <div class="col-md-1"></div>
+       </div>
+      
         
 
     </div>
