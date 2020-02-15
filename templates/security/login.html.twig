@@ -4,43 +4,49 @@
 
 {% block body %}
 <div class="container">
-    <form method="post" class="mt-2">
-        {% if error %}
-            <div class="alert alert-dismissible alert-danger">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ error.messageKey|trans(error.messageData, 'security') }}
-            </div>
-        {% endif %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.fristName }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
-            </div>
-        {% endif %}
-        
-        <h1 class="mb-3 mt-4 font-weight-normal">Connexion à Immobilier Digital</h1>
-        <label for="inputEmail">Votre e-mail</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-        <label for="inputPassword">Mot de passe</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" required>
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+         <div class="col-md-6">
+                <form method="post" class="mt-2">
+                    {% if error %}
+                        <div class="alert alert-dismissible alert-danger">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
 
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-        >
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.fristName }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                        </div>
+                    {% endif %}
+                    
+                    <h1 class="mb-3 mt-4 font-weight-normal">Connexion</h1>
+                    <label for="inputEmail">Votre e-mail</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                    <label for="inputPassword" class="mt-2">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" required>
 
-            <div class="checkbox mb-3 mt-3">
-                <label>
-                    <input type="checkbox" name="_remember_me" title="test"> Se souvenir de moi
-                </label>
-            </div>
-       
-        
-        <button class="btn btn-center btn-success" type="submit">
-            <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;
-            Connexion
-        </button>
-       
-        
-    </form>
+                    <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                    >
+                        <div class="checkbox mb-3 mt-3">
+                            <label>
+                                <input type="checkbox" name="_remember_me" title="test"> Se souvenir de moi
+                            </label>
+                        </div>
+                    <button class="btn btn-center btn-success" type="submit">
+                        <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;
+                        Connexion
+                    </button>
+                </form>
+        </div>
+         <div class="col-md-3">
+        </div>
+    </div>
+
+
 </div>
 {% endblock %}
