@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profile{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="mt-5 mb-4">Mon profile</h1>
+
+       <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header"> {{app.user.genderType}} {{app.user.fullName}}</div>
+            <div class="card-body">
+                <h4 class="card-title">{{app.user.email}}</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+
+       
+        <a href="{{ path('user_account_edit') }}" class="btn btn-center btn-success"><i class="fas fa-user-check"></i>&nbsp;&nbsp;Modifier mon profil</a>
+        
+
+    </div>
+
+
+
+
+
+    
+
+{% endblock %} 

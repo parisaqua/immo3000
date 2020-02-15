@@ -2,3 +2,7 @@
  display : block;
  margin : 15px auto;
 }
+
+a.btn-center {
+    max-width: 200px;
+}
