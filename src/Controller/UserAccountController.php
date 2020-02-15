@@ -68,4 +68,58 @@ class UserAccountController extends AbstractController
         ]); 
     }
 
+    /**
+     * Permet de modifier le mot de pase de l'utilisateur
+     *
+     * @Route("/user/account/update-password", name="user_account_password_reset")
+     * 
+     * @return void
+     */
+    public function updatePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $manager) {
+        
+        $passwordUpdate = new PasswordUpdate();
+
+        $user = $this->getUser();
+
+        $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            if(!password_verify($passwordUpdate->getOldPassword(), $user->getPassword())){
+                // Gérer l'erreur
+                $form->get('oldPassword')->addError(new FormError("Le mot de passe que vous avez tapé n'est pas votre mot de passe actuel"));
+            }
+            else{
+                $newPassword = $passwordUpdate->getNewPassword();
+                
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('newPassword')->getData()
+                    )
+                );
+    
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash(
+                    'success',
+                    "Votre mot de passe a bien été modifié"
+                );
+
+                return $this->redirectToRoute('home_page');
+            }
+
+            password_verify('password', '');
+        }
+        
+        
+        
+        return $this->render('user_account/user_password_reset.htlm.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
 }
