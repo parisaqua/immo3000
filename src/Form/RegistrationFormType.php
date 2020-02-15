@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegistrationFormType extends ApplicationType
 {
@@ -36,12 +37,10 @@ class RegistrationFormType extends ApplicationType
                     ]),
                 ],
             ]))
-            ->add('plainPassword', PasswordType::class, $this->getConfiguration("Mot de passe (6 caractères minimum)", "Choisissez un mot de passe ..." , [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'mapped' => false,
-                'required'=>false
-                ,
+                'required' => false,
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Renseignez un mot de passe',
@@ -52,8 +51,11 @@ class RegistrationFormType extends ApplicationType
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]
-                ),],
-            ]))
+                ),], 
+                'invalid_message' => 'Les mots de passe ne correspondent pas',
+                'first_options'  => ['label' => 'Mot de passe (6 caractères minimum)'],
+                'second_options' => ['label' => 'Confirmation du mot de passe'],
+            ]);
         ;
     }
 

@@ -44,9 +44,9 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * 
      */
     private $password;
+
 
       /**
      * @ORM\Column(type="integer")
@@ -68,6 +68,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Veuillez renseigner votre nom de famille.")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Votre nom doit contenir au minimum {{ limit }} charactères.",
+     *      maxMessage = "Votre nom ne peut pas exéder {{ limit }} charactères."
+     * )
      */
     private $lastName;
 
