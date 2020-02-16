@@ -31,7 +31,8 @@ class UserAccountController extends AbstractController
      */
     public function myAccount() {
         return $this->render('user_account/show.html.twig', [
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'current_menu' => 'userAccount'
         ]);
 
     }
@@ -64,7 +65,7 @@ class UserAccountController extends AbstractController
 
         return $this->render('user_account/user_account.html.twig', [
             'form' => $form->createView(),
-            // 'controller_name' => 'UserAccountController'
+            'current_menu' => 'userAccount'
         ]); 
     }
 
@@ -118,7 +119,8 @@ class UserAccountController extends AbstractController
         
         
         return $this->render('user_account/user_password_reset.htlm.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'current_menu' => 'userAccount'
         ]);
     }
 

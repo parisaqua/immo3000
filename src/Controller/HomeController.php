@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     public function index()
     {
         return $this->render('home/home.html.twig', [
-            'controller_name' => 'HomeController',
+            'current_menu' => 'home'
         ]);
     }
 }

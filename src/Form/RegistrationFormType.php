@@ -53,8 +53,12 @@ class RegistrationFormType extends ApplicationType
                     ]
                 ),], 
                 'invalid_message' => 'Les mots de passe ne correspondent pas',
-                'first_options'  => ['label' => 'Mot de passe (6 caractères minimum)'],
-                'second_options' => ['label' => 'Confirmation du mot de passe'],
+                'first_options'  => ['label' => 'Mot de passe',  'attr' => [
+                    'placeholder' => '6 caractères minimum'
+                ]],
+                'second_options' => ['label' => 'Confirmation du mot de passe',  'attr' => [
+                    'placeholder' => 'Confirmez votre nouveau mot de passe'
+                ]],
             ]);
         ;
     }
