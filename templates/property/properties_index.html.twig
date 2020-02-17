@@ -29,7 +29,8 @@
                <li class="list-group-item">Nombre de chambres : {{ property.bedrooms }} </li>
             </ul>
             <div class="card-body">
-               <a href="#" class="btn btn-center btn-info">Détail ...</a>
+               <h5 class="text-info text-center"> {{property.formatedPrice}} €</h5>
+               <a href=" {{ path('property_show', {id: property.id, slug: property.slug} )}} " class="btn btn-center btn-info">Détail ...</a>
             </div>
             <div class="card-footer text-muted">
                Bien créé le {{ property.createdAt|date('d/m/Y') }}

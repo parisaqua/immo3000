@@ -29,6 +29,26 @@ class PropertyController extends AbstractController {
         ]);
     }
 
+    /**
+     * Détail d'un bien
+     * 
+     * @Route("/biens/{slug}-{id}", name="property_show", requirements={"slug"= "[a-z0-9\-]*" }) 
+     * 
+     * @return Response
+     */
+    public function show(PropertyRepository $repository, $slug, $id): Response {
+        
+        $property = $repository->find($id);
+
+        return $this->render('property/property_show.html.twig', [
+            'current_menu' => 'properties',
+            'property' => $property
+
+        ]);
+    }
+
+
+
 
 
 }
