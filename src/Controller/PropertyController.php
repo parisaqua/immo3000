@@ -20,12 +20,9 @@ class PropertyController extends AbstractController {
      */
     public function index(PropertyRepository $repository): Response {
         
-        $properties = $repository->findAllVisible();
-       
-
         return $this->render('property/properties_index.html.twig', [
             'current_menu' => 'properties',
-            'properties' => $properties
+            'properties' => $repository->findAllVisible()
         ]);
     }
 
@@ -36,10 +33,8 @@ class PropertyController extends AbstractController {
      * 
      * @return Response
      */
-    public function show(PropertyRepository $repository, $slug, $id): Response {
+    public function show(PropertyRepository $repository, Property $property): Response {
         
-        $property = $repository->find($id);
-
         return $this->render('property/property_show.html.twig', [
             'current_menu' => 'properties',
             'property' => $property
