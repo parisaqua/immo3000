@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="container">
-        <h1 class="mt-5 mb-4">Mon profile</h1>
+        <h1 class="mt-5 mb-4"><i class="fas fa-user"></i>&nbsp;&nbsp;Mon profile</h1>
 
        <div class="card border-primary mb-3" style="max-width: 20rem;">
             <div class="card-header"> {{app.user.genderType}} {{app.user.fullName}}</div>
@@ -16,14 +16,11 @@
         </div>
 
        <div class="row pt-4">
-            <div class="col-md-1"></div>
-            <div class="col-md-5">
-                <a href="{{ path('user_account_edit') }}" class="btn btn-center btn-info"><i class="fas fa-user"></i>&nbsp;&nbsp;Modifier mon profil</a>
-            </div>
-            <div class="col-md-5">
-                <a href="{{ path('user_account_password_reset') }}" class="btn btn-center btn-info"><i class="fas fa-lock"></i>&nbsp;&nbsp;Modifier mon mot de passe</a>
-            </div>
-            <div class="col-md-1"></div>
+            <div class="col-md-2"></div>
+            <a href="{{ path('user_account_edit') }}" class="btn btn-info col-md-3 center-block"><i class="fas fa-user-cog"></i>&nbsp;&nbsp;Modifier mon profil</a>
+            <div class="col-md-2"></div>
+            <a href="{{ path('user_account_password_reset') }}" class="btn btn-info col-md-3 center-block"><i class="fas fa-lock"></i>&nbsp;&nbsp;Modifier mon mot de passe</a>
+            <div class="col-md-2"></div>
        </div>
       
         

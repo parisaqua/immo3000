@@ -30,7 +30,7 @@ class UserAccountController extends AbstractController
      * @return Response
      */
     public function myAccount() {
-        return $this->render('user_account/show.html.twig', [
+        return $this->render('user_account/user_account_show.html.twig', [
             'user' => $this->getUser(),
             'current_menu' => 'userAccount'
         ]);
