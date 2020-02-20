@@ -208,6 +208,15 @@ class Property
         return $this;
     }
 
+    /**
+     * Traitement du chauffage
+     *
+     * @return string
+     */
+    public function getHeatType(): string {
+        return self::HEAT[$this->heat];
+    }
+
     public function getAddress(): ?string
     {
         return $this->address;

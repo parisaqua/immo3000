@@ -16,6 +16,8 @@
       <div class="col-md-8">
          <h2> Bien n°{{ property.id }} </h2> 
          <h6 class="card-subtitle text-muted"> {{ property.address }}, {{ property.postalCode }} {{ property.city }} </h6>
+         <p>Chauffage : {{ property.heatType }} </p>
+
       </div>
       <div class="col-md-2"></div>
       <a href=" {{path('properties_index')}} " class="btn btn-center btn-info">Liste des biens ...</a>

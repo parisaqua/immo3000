@@ -10,11 +10,30 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
+/**
+ * @Route("/biens")
+ */
 class PropertyController extends AbstractController {
     
     /**
+     * @var PropertyRepository
+     */
+    private $repository;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    public function __construct(PropertyRepository $repository, EntityManagerInterface $em) {
+        $this->repository = $repository;
+        $this->em = $em;
+    }
+    
+    /**
      * Liste des biens immobiliers
-     * @Route("/biens", name="properties_index") 
+     * @Route("/", name="properties_index") 
      * @IsGranted("ROLE_USER")
      * @return Response
      */
@@ -29,11 +48,18 @@ class PropertyController extends AbstractController {
     /**
      * Détail d'un bien
      * 
-     * @Route("/biens/{slug}-{id}", name="property_show", requirements={"slug"= "[a-z0-9\-]*" }) 
+     * @Route("/{slug}-{id}", name="property_show", requirements={"slug"= "[a-z0-9\-]*" }) 
      * 
      * @return Response
      */
-    public function show(PropertyRepository $repository, Property $property): Response {
+    public function show(PropertyRepository $repository, Property $property, $id, $slug): Response {
+        
+        if($property->getSlug() !== $slug) {
+            return $this->redirectToRoute('property_show', [
+                'id' => $property->getId(),
+                'slug' => $property->getSlug()
+            ], 301);
+        }
         
         return $this->render('property/property_show.html.twig', [
             'current_menu' => 'properties',
