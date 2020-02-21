@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des biens{% endblock %}
+
+{% block header %}
+<h2>Administration des biens</h2>
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4">
+   <h1 class="pb-4">Administration des Biens</h1>
+
+  
+   <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>titre</th>
+            <th>actions</th>
+        </tr>
+
+    </thead>
+    <tbody>
+    {% for property in properties %}
+        <tr>
+            <td>{{ property.title }}</td>
+            <td> <a href="#" class="btn btn-info">Editer</a> </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+   
+   </table>
+
+
+  
+   
+
+</div>
+
+
+</div>
+{% endblock %}
