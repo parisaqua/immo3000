@@ -15,7 +15,7 @@ class Property
         1 => 'individuel gaz',
         2 => 'collectif fioul',
         3 => 'poil',
-        4 => 'autre -> voir descriptif',
+        4 => 'autre (voir description)',
         5 => 'sans'
     ];
     

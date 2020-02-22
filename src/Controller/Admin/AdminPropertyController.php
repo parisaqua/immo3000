@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Property;
+use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -27,7 +29,7 @@ class AdminPropertyController extends AbstractController
     }
     
     /**
-     * @Route("/admin/property", name="admin_property")
+     * @Route("/admin/property", name="admin_property_index")
      */
     public function index()
     {
@@ -46,10 +48,21 @@ class AdminPropertyController extends AbstractController
      * @Route("/admin/property/{id}", name="admin_property_edit")
      * 
      */
-    public function edit(Property $property) {
+    public function edit(Property $property, Request $request) {
+        
+        $form = $this->createForm(PropertyType::class, $property);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $this->em->flush();
+            return $this->redirectToRoute('admin_property_index');
+        }
+        
         return $this->render('admin/property/admin_property_edit.html.twig', [
             'property' => $property,
             'current_menu' => 'admin',
+            'form' => $form->createView()
         ]);
     }
 
