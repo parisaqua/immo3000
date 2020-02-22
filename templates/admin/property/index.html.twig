@@ -24,7 +24,7 @@
     {% for property in properties %}
         <tr>
             <td>{{ property.title }}</td>
-            <td> <a href="#" class="btn btn-info">Editer</a> </td>
+            <td> <a href="{{ path('admin_property_edit', {id:property.id}) }}" class="btn btn-info">Editer</a> </td>
         </tr>
     {% endfor %}
     </tbody>

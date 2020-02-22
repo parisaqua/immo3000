@@ -12,7 +12,24 @@
             </li>
             {% if app.user %}
             <li class="nav-item {% if current_menu is defined and current_menu == 'properties' %}active{% endif %}">
-                <a class="nav-link  " href="{{ path('properties_index') }}">Les biens</a>
+                <a class="nav-link  " href="{{ path('properties_index') }}"><i class="fas fa-city"></i> Mon portefeuille</a>
+            </li>
+            {% endif %}
+            {% if app.user and is_granted('ROLE_ADMIN')%}
+            <li class="nav-item dropdown {% if current_menu is defined and current_menu == 'admin' %}active{% endif %}">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true"><i class="fas fa-tools"></i> Admin</a>
+                <div class="dropdown-menu dropdown-menu-left mt-1" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                <a class="dropdown-item" href="#">Les individus</a>
+                <a class="dropdown-item" href="{{ path('admin_property') }}">Les biens</a>
+                <a class="dropdown-item" href="#">Les événements</a>
+                <a class="dropdown-item" href="#">Les baux</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Types de bien</a>
+                <a class="dropdown-item" href="#">Charactéristiques des biens</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Status</a>
+                <a class="dropdown-item" href="#">Type d'évènement</a>
+                </div>
             </li>
             {% endif %}
         </ul>

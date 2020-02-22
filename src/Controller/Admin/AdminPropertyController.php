@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Property;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,4 +38,20 @@ class AdminPropertyController extends AbstractController
             'properties' => $properties
         ]);
     }
+
+
+    /**
+     * Editier les biens
+     *
+     * @Route("/admin/property/{id}", name="admin_property_edit")
+     * 
+     */
+    public function edit(Property $property) {
+        return $this->render('admin/property/admin_property_edit.html.twig', [
+            'property' => $property,
+            'current_menu' => 'admin',
+        ]);
+    }
+
+
 }
