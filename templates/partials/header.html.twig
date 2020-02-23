@@ -74,13 +74,4 @@
     </div>
 </nav>
 
-{% for label, messages in app.flashes %}
-<div class="container">
-    <div class="alert alert-dismissible alert-{{ label }} mt-3">
-        {% for message in messages %}
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <p>{{ message | raw }}</p>
-        {% endfor %}
-    </div>
-</div>
-{% endfor %}
+

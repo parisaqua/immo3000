@@ -9,9 +9,11 @@
 {% block body %}
 
 <div class="container mt-4">
-   <h1 class="pb-4">Administration des Biens</h1>
 
-  
+    <div class="row align-items-center">
+        <div class="col-md-9"> <h1 class="">Administration des Biens</h1></div>
+        <div class="col-md-3"><a href="{{ path('admin_property_new') }}" class="btn btn-success"><li class="fa fa-plus-circle"></li>&nbsp;Ajouter un bien</a></div>
+    </div>
    <table class="table table-striped">
     <thead>
         <tr>
@@ -24,7 +26,14 @@
     {% for property in properties %}
         <tr>
             <td>{{ property.title }}</td>
-            <td> <a href="{{ path('admin_property_edit', {id:property.id}) }}" class="btn btn-info">Editer</a> </td>
+            <td>
+                <a href="{{ path('admin_property_edit', {id:property.id}) }}" class="btn btn-info">Editer</a> 
+                <form method="post" action="{{ path('admin_property_delete', {id: property.id}) }}" style="display: inline-block;" onsubmit="return confirm('Etes-vous certain ?')">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id )}}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
         </tr>
     {% endfor %}
     </tbody>

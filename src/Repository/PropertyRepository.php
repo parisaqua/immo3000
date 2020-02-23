@@ -20,6 +20,23 @@ class PropertyRepository extends ServiceEntityRepository
     }
 
     /**
+     * Liste de tous les biens triés par date de création
+     *
+     * @return Property
+     */
+    public function findAll(): array {
+        return $this->createQueryBuilder('p')
+        ->orderBy('p.createdAt', 'DESC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult()
+    ;
+    }
+    
+    
+    
+    
+    /**
      * Liste des biens disponibles
      *
      * @return Property
