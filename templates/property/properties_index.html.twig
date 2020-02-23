@@ -7,7 +7,12 @@
 {% endblock %}
 
 {% block body %}
-
+<div class="jumbotron">
+   <div class="container">
+      {{ form_start(form) }}
+      {{ form_end(form) }}
+   </div>
+</div>
 <div class="container mt-4">
    <h1 class="pb-4">Liste des biens</h1>
    <div class="row">
