@@ -23,6 +23,7 @@ class PasswordUpdateType extends ApplicationType
     {
         $resolver->setDefaults([
             // Configure your form options here
+            'translation_domain' => "forms"
         ]);
     }
 }

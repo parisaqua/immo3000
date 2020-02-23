@@ -27,14 +27,11 @@ class PropertyRepository extends ServiceEntityRepository
     public function findAll(): array {
         return $this->createQueryBuilder('p')
         ->orderBy('p.createdAt', 'DESC')
-        ->setMaxResults(10)
+        ->setMaxResults(50)
         ->getQuery()
         ->getResult()
     ;
     }
-    
-    
-    
     
     /**
      * Liste des biens disponibles
@@ -44,8 +41,8 @@ class PropertyRepository extends ServiceEntityRepository
     public function findAllVisible(): array {
         return $this->createQueryBuilder('p')
         ->andWhere('p.sold = false')
-        ->orderBy('p.price', 'DESC')
-        ->setMaxResults(10)
+        ->orderBy('p.createdAt', 'DESC')
+        ->setMaxResults(20)
         ->getQuery()
         ->getResult()
     ;
