@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\Query;
 use App\Entity\Property;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Property|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,32 +22,58 @@ class PropertyRepository extends ServiceEntityRepository
     }
 
     /**
-     * Liste de tous les biens triés par date de création
+     * Liste de tous les biens triés par date de création pour admin
      *
      * @return Property
      */
-    public function findAll(): array {
+    
+    
+    
+     /**
+      * Query pour paginator dans la page d'admin des biens
+      *
+      * @return Query
+      */
+     public function findAllQuery(): Query {
+        return $this->findAll()
+        ->getQuery()
+    ;
+    }
+    
+    
+    
+    /**
+     * Query pour trier tous les biens par date de création
+     *
+     * @return QueryBuilder
+     */ 
+    public function findAll(): QueryBuilder {
         return $this->createQueryBuilder('p')
         ->orderBy('p.createdAt', 'DESC')
-        ->setMaxResults(50)
-        ->getQuery()
-        ->getResult()
+        
     ;
     }
     
     /**
      * Liste des biens disponibles
      *
-     * @return Property
+     * @return Query
      */
-    public function findAllVisible(): array {
-        return $this->createQueryBuilder('p')
-        ->andWhere('p.sold = false')
-        ->orderBy('p.createdAt', 'DESC')
-        ->setMaxResults(20)
+    public function findAllVisibleQuery(): Query {
+        
+        return $this->findVisibleQuery()
         ->getQuery()
-        ->getResult()
     ;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return QueryBuilder
+     */
+    public function findVisibleQuery(): QueryBuilder {
+        return $this->createQueryBuilder('p')
+        ->andWhere('p.sold = false');
     }
     
     

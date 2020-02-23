@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Property;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -37,11 +39,17 @@ class PropertyController extends AbstractController {
      * @IsGranted("ROLE_USER")
      * @return Response
      */
-    public function index(PropertyRepository $repository): Response {
+    public function index(PaginatorInterface $paginator, Request $request): Response {
+        
+        $properties = $paginator->paginate(
+            $this->repository->findAllVisibleQuery(),
+            $request->query->getInt('page', 1),
+            6
+        );
         
         return $this->render('property/properties_index.html.twig', [
             'current_menu' => 'properties',
-            'properties' => $repository->findAllVisible()
+            'properties' => $properties
         ]);
     }
 

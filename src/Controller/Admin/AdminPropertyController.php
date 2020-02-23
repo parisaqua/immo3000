@@ -6,6 +6,7 @@ use App\Entity\Property;
 use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,10 +33,14 @@ class AdminPropertyController extends AbstractController
     /**
      * @Route("/admin/property", name="admin_property_index")
      */
-    public function index()
+    public function index(PaginatorInterface $paginator, Request $request)
     {
-        $properties = $this->repository->findAll();
-        
+        $properties = $paginator->paginate(
+            $this->repository->findAllQuery(),
+            $request->query->getInt('page', 1),
+            10
+        );
+
         return $this->render('admin/property/index.html.twig', [
             'current_menu' => 'admin',
             'properties' => $properties
