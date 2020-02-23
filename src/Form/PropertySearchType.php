@@ -6,6 +6,7 @@ use App\Entity\PropertySearch;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class PropertySearchType extends AbstractType
@@ -13,18 +14,18 @@ class PropertySearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('maxSurface', IntegerType::class, [
-                'required' => false,
-                'label' => false,
-                'attr' => [
-                    'placeholder' => 'Surface maximale'
-                ]
-            ])
             ->add('minSurface', IntegerType::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Surface minimale'
+                ]
+            ])
+            ->add('maxSurface', IntegerType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Surface maximale'
                 ]
             ])
         ;
@@ -35,7 +36,12 @@ class PropertySearchType extends AbstractType
         $resolver->setDefaults([
             'data_class' => PropertySearch::class,
             'method' => 'GET',
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'translation_domain' => "forms"
         ]);
+    }
+
+    public function getBlockPrefix() {
+        return '';
     }
 }

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use Doctrine\ORM\Query;
 use App\Entity\Property;
+use App\Entity\PropertySearch;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -27,8 +28,6 @@ class PropertyRepository extends ServiceEntityRepository
      * @return Property
      */
     
-    
-    
      /**
       * Query pour paginator dans la page d'admin des biens
       *
@@ -39,8 +38,6 @@ class PropertyRepository extends ServiceEntityRepository
         ->getQuery()
     ;
     }
-    
-    
     
     /**
      * Query pour trier tous les biens par date de création
@@ -59,11 +56,23 @@ class PropertyRepository extends ServiceEntityRepository
      *
      * @return Query
      */
-    public function findAllVisibleQuery(): Query {
+    public function findAllVisibleQuery(PropertySearch $search): Query {
         
-        return $this->findVisibleQuery()
-        ->getQuery()
-    ;
+        $query = $this->findVisibleQuery();
+
+        if($search->getMaxSurface()) {
+            $query = $query
+                ->andWhere('p.surface <= :maxSurface')
+                ->setParameter('maxSurface', $search->getMaxSurface());
+        }
+
+        if($search->getMinSurface()) {
+            $query = $query
+                ->andWhere('p.surface >= :minSurface')
+                ->setParameter('minSurface', $search->getMinSurface());
+        }
+
+        return $query->getQuery();
     }
 
     /**
