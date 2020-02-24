@@ -32,6 +32,7 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      * @Assert\Length(
      *      min = 10,
      *      max = 200,
