@@ -1,0 +1,10 @@
+ {{ form_start(form) }}
+    <div class="row align-items-end">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">{{ form_row(form.name) }}</div>
+        <div class="col-md-4"></div>
+    </div>
+    </div>
+    {{ form_widget(form) }}
+    <button class="btn btn-success btn-center"><li class="fa fa-check"></li>&nbsp; {{ button|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
