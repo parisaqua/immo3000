@@ -39,6 +39,13 @@ class Property
      * 
      * @Vich\UploadableField(mapping="property_image", fileNameProperty="imageName")
      * 
+     * @Assert\Image(
+     *     maxSize = "4096k",
+     *     maxSizeMessage="La taille de l'image ne peut exéder 4 Mo.",
+     *     mimeTypes = {"image/jpeg", "application/png"},
+     *     mimeTypesMessage = "L'image doit être au format jpeg ou png."
+     * )
+     * 
      * @var File|null
      */
     private $imageFile;
