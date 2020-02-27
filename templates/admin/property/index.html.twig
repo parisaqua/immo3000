@@ -39,7 +39,7 @@
                {% endif %}
             </td>
             <td>{{ property.title }}</td>
-            <td class="text-center"> {% if property.sold == 1 %} Vendue {% else %} Libre {% endif %}</td>
+            <td class="text-center">{{ property.rooms }} pièces{% if property.sold == 1 %} Vendu {% else %} Libre {% endif %}de {{property.surface}}m²</td>
             <td class="text-center">
                 <a href="{{ path('admin_property_edit', {id:property.id}) }}" class="btn btn-info">Editer</a> 
                 <form method="post" action="{{ path('admin_property_delete', {id: property.id}) }}" style="display: inline-block;" onsubmit="return confirm('Etes-vous certain ?')">

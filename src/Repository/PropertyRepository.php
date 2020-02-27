@@ -46,7 +46,7 @@ class PropertyRepository extends ServiceEntityRepository
      */ 
     public function findAll(): QueryBuilder {
         return $this->createQueryBuilder('p')
-        ->orderBy('p.createdAt', 'DESC')
+        ->orderBy('p.updatedAt', 'DESC')
         
     ;
     }
@@ -92,7 +92,8 @@ class PropertyRepository extends ServiceEntityRepository
      */
     public function findVisibleQuery(): QueryBuilder {
         return $this->createQueryBuilder('p')
-        ->andWhere('p.sold = false');
+        ->andWhere('p.sold = false')
+        ->orderBy('p.updatedAt', 'DESC');
     }
     
     
