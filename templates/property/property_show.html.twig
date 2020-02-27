@@ -17,6 +17,11 @@
          <h2> Bien n°{{ property.id }} </h2> 
          <h6 class="card-subtitle text-muted"> {{ property.address }}, {{ property.postalCode }} {{ property.city }} </h6>
          <p>Chauffage : {{ property.heatType }} </p>
+         <p>
+         {% for option in property.options %}
+                <li class= list-group-item> {{ option.name }} </li>
+         {% endfor %}
+         </p>
 
       </div>
       <div class="col-md-2"></div>
