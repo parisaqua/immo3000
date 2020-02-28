@@ -93,6 +93,11 @@ class User implements UserInterface
      */
     private $active = true;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
     public function getFullName() {
         return "{$this->firstName} {$this->lastName}";
     }
@@ -269,5 +274,17 @@ class User implements UserInterface
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime("now");
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 }

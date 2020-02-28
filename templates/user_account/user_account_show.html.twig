@@ -7,11 +7,37 @@
     <div class="container">
         <h1 class="mt-5 mb-4"><i class="fas fa-user"></i>&nbsp;&nbsp;Mon profile</h1>
 
-       <div class="card border-primary mb-3" style="max-width: 20rem;">
+       
+       <div class="card border-primary mb-3" style="max-width: 30rem;">
             <div class="card-header"> {{app.user.genderType}} {{app.user.fullName}}</div>
             <div class="card-body">
-                <h4 class="card-title">{{app.user.email}}</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    {# {% if app.user.Avatar %}
+                        <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb_360') }}" alt="" class="card-img-top">
+                    {% else %} #}
+                        {% if app.user.gender == 0 %}
+                            <img src="{{ '/images/default/avatarH.png' | imagine_filter('thumb_avatar') }}" alt="Image" class="avatar">
+                        {% else %}
+                            <img src="{{ '/images/default/avatarF.png' | imagine_filter('thumb_avatar') }}" alt="Image" class="avatar">
+                        {% endif %}
+                    {# {% endif %} #}
+                </div>
+                <div class="col-md-8">
+                    <h4 class="card-title">{{app.user.email}}</h4>
+                    <h4 class="card-title">00-00-00-00-00</h4>
+                    <p class="card-text mt-2">
+                        {% if app.user.description %}
+                            {{app.user.description | nl2br }}
+                        {% else %}
+                            <p class="text-info">Décrivez-vous en quelques mots. Cliquez vite sur "Modifier mon profil" !</p>
+                        {% endif %}
+                    </p>
+                    
+                </div>
+            
+            </div>
+               
             </div>
         </div>
 

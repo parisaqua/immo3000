@@ -6,3 +6,14 @@
 a.btn-center {
     width: auto;
 }
+
+.avatar {
+
+    padding: 0rem;
+    background-color: #3498DB;
+    border: 0px solid #eceeef;
+    border-radius: 6rem;
+    height: auto;
+    width : 100%;
+    max-width : 300px;
+}

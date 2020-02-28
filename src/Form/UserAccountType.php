@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class UserAccountType extends ApplicationType
 {
@@ -22,6 +23,7 @@ class UserAccountType extends ApplicationType
         ->add('gender', ChoiceType::class, ['choices' => $this->getChoices(),'label' => 'Civilité'])
         ->add('firstName', TextType:: class, $this->getConfiguration("Prénom", "Votre prénom ...", ['required'=>false])  )
         ->add('lastName', TextType:: class, $this->getConfiguration("Nom", "Votre nom ...", ['required'=>false]) )
+        ->add('description', TextareaType::class, $this->getConfiguration("Description", "Décrivez-vous en quelque mots ...", ['required'=>false]))
         ;
     }
 
